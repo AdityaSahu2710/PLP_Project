@@ -90,11 +90,17 @@ public class ShowController {
 	@DeleteMapping("/deleteshow/{showId}")
 	public String deleteShow(@PathVariable Integer showId) {
 		try {
+			String ss=readShow(showId);
 			if (showId == 0 || showId == null)
 				throw new ShowExceptions(showId);
 			else if (showId.toString().length() < 8) {
 				throw new ShowExceptions(showId);
-			} else {
+			}
+			else if (ss.equals("ShowId not found")) {
+				return "Delete Unsuccessful";
+				
+			}
+			else {
 				if (service.deleteShow(showId))
 					return "Delete Successfully";
 				return "Delete Unsuccessful";
