@@ -11,7 +11,6 @@ public class ConsumerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConsumerApplication.class, args);
-		System.out.println("BookShowMS started");
 	}
 	@Bean
 	@LoadBalanced

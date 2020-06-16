@@ -37,11 +37,11 @@ public class ConsumerController {
 	// http://localhost:4000/show/update/<enterid>
 	@PutMapping("/show/update/{showId}")
 	public String updateShow(@PathVariable Integer showId, @RequestBody Show show) {
-		String shows = rest.getForObject("http://ShowMS/updateshow/" + showId, String.class);
-		if (shows == null || shows.equals(""))
+		String shows = rest.getForObject("http://ShowMS/readshow/" + showId,String.class);
+		if (shows == null || shows.equals("ShowId not found"))
 			return "Show Updation UnSuccessful";
 		else {
-			rest.put("http://ShowMS/showupdate/" + showId, show, String.class);
+			rest.put("http://ShowMS/updateshow/" + showId, show, String.class);
 			return "Show Updation Successful";
 		}
 	}
@@ -49,11 +49,11 @@ public class ConsumerController {
 	// http://localhost:4000/show/delete/<enterid>
 	@DeleteMapping("/show/delete/{showId}")
 	public String deleteShow(@PathVariable Integer showId) {
-		String show = rest.getForObject("http://ShowMS/deleteshow/" + showId, String.class);
-		if (show == null || show.equals("")) {
+		String show = rest.getForObject("http://ShowMS/readshow/" + showId, String.class);
+		if (show == null || show.equals("ShowId not found")) {
 			return "Show Deletion unsuccessful";
 		} else {
-			rest.delete("http://ShowMS/deleteShow/" + showId, showId);
+			rest.delete("http://ShowMS/deleteshow/" + showId);
 			return "Show Deletion successful";
 		}
 
